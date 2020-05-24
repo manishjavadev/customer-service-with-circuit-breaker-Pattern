@@ -6,8 +6,8 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.manish.javadev.controller.model.BookingDetail;
-import com.manish.javadev.controller.model.Vehicle;
+import com.manish.javadev.model.BookingDetail;
+import com.manish.javadev.model.Vehicle;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service

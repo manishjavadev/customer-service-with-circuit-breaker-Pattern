@@ -1,4 +1,4 @@
-package com.manish.javadev.controller.model;
+package com.manish.javadev.model;
 
 import java.util.List;
 

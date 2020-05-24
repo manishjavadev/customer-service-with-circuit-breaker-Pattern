@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.manish.javadev.controller.model.Customer;
-import com.manish.javadev.controller.model.CustomerResponseDetail;
-import com.manish.javadev.controller.model.BookingDetail;
-import com.manish.javadev.controller.model.VehicleResponseDetails;
+import com.manish.javadev.model.BookingDetail;
+import com.manish.javadev.model.Customer;
+import com.manish.javadev.model.CustomerResponseDetail;
+import com.manish.javadev.model.VehicleResponseDetails;
 import com.manish.javadev.service.RentDetailCommand;
 import com.manish.javadev.service.VehicleDetailsCommand;
 
@@ -59,7 +59,7 @@ public class CustomerServiceController {
 		return vehicleDetailsCommand.execute();
 	}
 
-	@RequestMapping(value = "/ping1")
+	@RequestMapping(value = "/ping")
 	public String ping() {
 		return "Configuration is working fine";
 	}

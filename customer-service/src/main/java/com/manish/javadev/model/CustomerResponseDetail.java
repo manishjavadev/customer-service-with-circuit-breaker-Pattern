@@ -1,4 +1,4 @@
-package com.manish.javadev.controller.model;
+package com.manish.javadev.model;
 
 public class CustomerResponseDetail {
 

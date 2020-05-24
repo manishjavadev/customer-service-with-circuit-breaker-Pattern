@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.client.RestTemplate;
 
-import com.manish.javadev.controller.model.Vehicle;
-import com.manish.javadev.controller.model.VehicleResponseDetails;
+import com.manish.javadev.model.Vehicle;
+import com.manish.javadev.model.VehicleResponseDetails;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 public class VehicleDetailsFallBackService {

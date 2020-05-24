@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.web.client.RestTemplate;
 
-import com.manish.javadev.controller.model.Vehicle;
-import com.manish.javadev.controller.model.VehicleResponseDetails;
+import com.manish.javadev.model.Vehicle;
+import com.manish.javadev.model.VehicleResponseDetails;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 

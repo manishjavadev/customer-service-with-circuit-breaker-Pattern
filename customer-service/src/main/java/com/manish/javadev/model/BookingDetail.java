@@ -1,4 +1,4 @@
-package com.manish.javadev.controller.model;
+package com.manish.javadev.model;
 
 public class BookingDetail {
 	private int vehicalId;
@@ -17,7 +17,6 @@ public class BookingDetail {
 	}
 
 	public BookingDetail() {
-		super();
 	}
 
 	public int getVehicalId() {
