@@ -1,19 +1,18 @@
 package com.manish.javadev.service;
 
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.manish.javadev.model.BookingDetail;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 
-public class RentDetailCommand extends HystrixCommand<BookingDetail> {
+public class BookingDetailCommand extends HystrixCommand<BookingDetail> {
 
 	private RestTemplate restTemplate;
 	private int userId;
 	private int vehicleId;
 
-	public RentDetailCommand(RestTemplate restTemplate, int userId, int vehicleId) {
+	public BookingDetailCommand(RestTemplate restTemplate, int userId, int vehicleId) {
 		super(HystrixCommandGroupKey.Factory.asKey("default"));
 		this.restTemplate = restTemplate;
 		this.userId = userId;

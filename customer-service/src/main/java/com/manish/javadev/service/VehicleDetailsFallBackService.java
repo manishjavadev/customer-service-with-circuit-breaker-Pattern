@@ -12,6 +12,7 @@ import com.manish.javadev.model.VehicleResponseDetails;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 public class VehicleDetailsFallBackService {
+
 	@Autowired
 	@LoadBalanced
 	private RestTemplate restTemplate;

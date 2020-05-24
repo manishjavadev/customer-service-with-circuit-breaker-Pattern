@@ -11,20 +11,20 @@ import com.manish.javadev.model.Vehicle;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
-public class RentDetailsFallBackService {
+public class BookingDetailFallBackService {
 
 	@Autowired
 	@LoadBalanced
 	private RestTemplate restTemplate;
 
-	@HystrixCommand(fallbackMethod = "getRentDetailsFallBack")
-	public BookingDetail getRentDetails(int userId, Vehicle vehical) {
+	@HystrixCommand(fallbackMethod = "getBookingDetailsFallBack")
+	public BookingDetail getBookingDetails(int userId, Vehicle vehical) {
 		BookingDetail rentDetail = restTemplate.getForObject(
 				"http://rent-service/api/rent/" + userId + "/" + vehical.getVehicalId(), BookingDetail.class);
 		return rentDetail;
 	}
 
-	public BookingDetail getRentDetailsFallBack(int userId, Vehicle vehical) {
+	public BookingDetail getBookingDetailsFallBack(int userId, Vehicle vehical) {
 		BookingDetail bookingDetail = new BookingDetail(vehical.getVehicalId(), userId, 0000.0, "LOCAL", "LOCAL");
 		return bookingDetail;
 	}
