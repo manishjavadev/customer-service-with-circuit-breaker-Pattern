@@ -36,35 +36,47 @@ public class CustomerServiceController3 {
 		customerMap.put(new Integer(100), customer);
 	}
 
-	@RequestMapping(value = "/bookings1/{userId}")
-	@HystrixCommand(fallbackMethod = "findBookingDetailsFallBack")
+	@RequestMapping(value = "/bookings2/{userId}")
 	List<CustomerResponseDetail> findBookingDetails(@PathVariable("userId") int userId) {
 
 		// TODO Rest call to get booking for Vehicles
-		VehicleResponseDetails vehicleDetails = restTemplate
-				.getForObject("http://vehicle-service/api/vehicles/" + userId, VehicleResponseDetails.class);
-		/* System.out.println(vehicleDetails.getVehicleList().get(0)); */
+		VehicleResponseDetails vehicleDetails = getVehicleDetails(userId);
 
 		return vehicleDetails.getVehicleList().stream().map(vehical -> {
 			// TODO Rest call to get booking price for each Vehicles
-			BookingDetail bookingDetail = restTemplate.getForObject(
-					"http://rent-service/api/rent/" + userId + "/" + vehical.getVehicalId(), BookingDetail.class);
+			BookingDetail bookingDetail = getBookingDetails(userId, vehical);
 			/* System.out.println(bookingDetail); */
 
 			return new CustomerResponseDetail(customerMap.get(new Integer(userId)), vehical, bookingDetail);
 		}).collect(Collectors.toList());
 	}
 
-	List<CustomerResponseDetail> findBookingDetailsFallBack(@PathVariable("userId") int userId) {
-		List<CustomerResponseDetail> responseList = new ArrayList<CustomerResponseDetail>();
-
-		CustomerResponseDetail customerResponseDetail = new CustomerResponseDetail(new Customer(), new Vehicle(),
-				new BookingDetail());
-		responseList.add(customerResponseDetail);
-		return responseList;
+	@HystrixCommand(fallbackMethod = "getVehicleDetailsFallBack")
+	private VehicleResponseDetails getVehicleDetails(int userId) {
+		return restTemplate.getForObject("http://vehicle-service/api/vehicles/" + userId, VehicleResponseDetails.class);
 	}
 
-	@RequestMapping(value = "/ping1")
+	private VehicleResponseDetails getVehicleDetailsFallBack(int userId) {
+		VehicleResponseDetails responseDetails = new VehicleResponseDetails();
+		List<Vehicle> vehicleList = new ArrayList<Vehicle>();
+		Vehicle vehicle = new Vehicle(0000, "Dummy vehicle", "0000", "Dummy model");
+		vehicleList.add(vehicle);
+		responseDetails.setVehicleList(vehicleList);
+		return responseDetails;
+	}
+
+	@HystrixCommand(fallbackMethod = "getBookingDetailsFallBack")
+	private BookingDetail getBookingDetails(int userId, Vehicle vehical) {
+		return restTemplate.getForObject("http://rent-service/api/rent/" + userId + "/" + vehical.getVehicalId(),
+				BookingDetail.class);
+	}
+
+	private BookingDetail getBookingDetailsFallBack(int userId, Vehicle vehical) {
+		BookingDetail bookingDetail = new BookingDetail(vehical.getVehicalId(), userId, 0000.0, "LOCAL", "LOCAL");
+		return bookingDetail;
+	}
+
+	@RequestMapping(value = "/ping2")
 	public String ping() {
 		return "Configuration is working fine";
 	}

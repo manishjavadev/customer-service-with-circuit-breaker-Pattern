@@ -18,7 +18,6 @@ import com.manish.javadev.model.CustomerResponseDetail;
 import com.manish.javadev.model.VehicleResponseDetails;
 import com.manish.javadev.service.BookingDetailFallBackService;
 import com.manish.javadev.service.VehicleDetailsFallBackService;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -42,8 +41,7 @@ public class CustomerServiceController2 {
 		customerMap.put(new Integer(100), customer);
 	}
 
-	@RequestMapping(value = "/bookings2/{userId}")
-	@HystrixCommand(fallbackMethod = "findBookingDetailsFallBack")
+	@RequestMapping(value = "/bookings1/{userId}")
 	List<CustomerResponseDetail> findBookingDetails(@PathVariable("userId") int userId) {
 
 		// TODO Rest call to get booking for Vehicles
@@ -57,7 +55,7 @@ public class CustomerServiceController2 {
 		}).collect(Collectors.toList());
 	}
 
-	@RequestMapping(value = "/ping2")
+	@RequestMapping(value = "/ping1")
 	public String ping() {
 		return "Configuration is working fine";
 	}

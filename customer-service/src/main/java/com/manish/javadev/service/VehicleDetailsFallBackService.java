@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.manish.javadev.model.Vehicle;
 import com.manish.javadev.model.VehicleResponseDetails;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+@Service
 public class VehicleDetailsFallBackService {
 
 	@Autowired
