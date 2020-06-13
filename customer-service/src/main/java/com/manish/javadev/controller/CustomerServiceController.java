@@ -24,7 +24,6 @@ import com.manish.javadev.service.VehicleDetailsCommand;
 public class CustomerServiceController {
 
 	@Autowired
-	@LoadBalanced
 	private RestTemplate restTemplate;
 
 	private Map<Integer, Customer> customerMap;
